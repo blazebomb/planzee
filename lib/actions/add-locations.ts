@@ -115,9 +115,15 @@ export async function addLocation(formData: FormData, tripId: string){
             }
         });
 
+        // Successful redirect - this will throw NEXT_REDIRECT internally (normal behavior)
         redirect(`/trips/${tripId}`);
 
     } catch (error) {
+        // Don't log NEXT_REDIRECT as an error (it's normal redirect behavior)
+        if (error instanceof Error && error.message === 'NEXT_REDIRECT') {
+            throw error; // Re-throw redirect errors without logging
+        }
+        
         console.error('Add location error:', error);
         
         // Re-throw the error so the UI can handle it
