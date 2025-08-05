@@ -1,0 +1,10 @@
+# Generated files
+app/generated/
+**/generated/
+.next/
+node_modules/
+dist/
+build/
+
+# Build outputs
+*.tsbuildinfo
