@@ -3,7 +3,8 @@ import { prisma } from "@/lib/prisma";
 
 
 
-export default async function AddLocation({ params }: { params: { tripId: string } }) {
+export default async function AddLocation(props: { params: Promise<{ tripId: string }> }) {
+  const params = await props.params;
   const tripId = await params.tripId;
 
   const trip = await prisma.trip.findUnique({
@@ -16,9 +17,11 @@ export default async function AddLocation({ params }: { params: { tripId: string
       <NewLocationClient tripId={tripId} title={trip?.title || "Unknown Trip"} />
 
 
+      ||||||||||||||||||||||TEST:|||||||||||||||||||||||||||||||||
       <p className="text-lg text-gray-100 mb-6">
-        You are adding a location to trip:{" "}
-        <span className="font-semibold">{trip?.title || "Unknown Trip"}</span>
+        
+        location to trip:{" "}
+        <span className="">{tripId}</span>
       </p>
     </>
   );
